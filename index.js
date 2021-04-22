@@ -26,6 +26,10 @@ server.listen(PORT, () => {
 server.get("/jobs", (req, res) => {
   const { tech } = req.query;
 
+  if (tech === undefined) {
+    return res.status(400).send({ error: "Tech query parameter is undefined" });
+  }
+
   getJobs(tech).then((jobs) => res.send(jobs));
 
   // res.send(jobs);
